@@ -1,36 +1,25 @@
-package com.singleton;
-
-import java.io.IOException;
-
-//1: create class
-class AppConfig {
-    private static AppConfig instance;
-
-    private AppConfig(){
-        System.out.println("AppConfig constructor calling");
-
-    }
-    public static AppConfig getInstance(){
-        if (instance==null){
-            instance=new AppConfig();
-        }
-
-        return instance;
-    }
-
-    public void showConfig(){
-        System.out.println("this is the application config and this is an example of singleton clas");
-    }
-
-}
+package com.enumm;
 
 public class Main {
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-
-        AppConfig myapp = AppConfig.getInstance();
-        myapp.showConfig();
-
+    public static void main(String[] args) {
+        printAccessLevel(UserRole.ADMIN);
+        printAccessLevel(UserRole.USER);
+        printAccessLevel(UserRole.GUEST);
     }
 
+    public static void printAccessLevel(UserRole role) {
+        switch (role) {
+            case ADMIN:
+                System.out.println("ADMIN: Full access to all system features.");
+                break;
+            case USER:
+                System.out.println("USER: Limited access to standard features.");
+                break;
+            case GUEST:
+                System.out.println("GUEST: Read-only access.");
+                break;
+            default:
+                System.out.println("Unknown role.");
+        }
+    }
 }
