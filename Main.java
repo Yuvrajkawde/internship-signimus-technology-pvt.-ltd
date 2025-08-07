@@ -1,25 +1,50 @@
-package com.enumm;
+package com.memberclass;
 
-public class Main {
-    public static void main(String[] args) {
-        printAccessLevel(UserRole.ADMIN);
-        printAccessLevel(UserRole.USER);
-        printAccessLevel(UserRole.GUEST);
+
+
+import java.io.*;
+
+
+interface Shape{
+    public double calculateArea();
+}
+abstract class Rectangle implements Shape{
+    protected int width;
+    protected int height;
+
+    //    constructor
+    public Rectangle(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
-    public static void printAccessLevel(UserRole role) {
-        switch (role) {
-            case ADMIN:
-                System.out.println("ADMIN: Full access to all system features.");
-                break;
-            case USER:
-                System.out.println("USER: Limited access to standard features.");
-                break;
-            case GUEST:
-                System.out.println("GUEST: Read-only access.");
-                break;
-            default:
-                System.out.println("Unknown role.");
+    static class Circle implements Shape {
+        private double radius;
+        public Circle(double radius){
+            this.radius = radius;
+        }
+        @Override
+        public double calculateArea() {
+            return 3.141 * radius * radius;
         }
     }
+}
+
+public class Main {
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+        Rectangle rectangle = new Rectangle(5,10) {
+            @Override
+            public double calculateArea() {
+                return width * height;
+            }
+        };
+
+        Rectangle.Circle circle = new Rectangle.Circle(23.2);
+
+        System.out.println("Rectangle: "+ rectangle.calculateArea());
+        System.out.println("Circle: "+ circle.calculateArea());
+    }
+
 }
