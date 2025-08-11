@@ -1,50 +1,29 @@
-package com.memberclass;
+package com.selectionsort;
 
-
-
-import java.io.*;
-
-
-interface Shape{
-    public double calculateArea();
-}
-abstract class Rectangle implements Shape{
-    protected int width;
-    protected int height;
-
-    //    constructor
-    public Rectangle(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
-
-    static class Circle implements Shape {
-        private double radius;
-        public Circle(double radius){
-            this.radius = radius;
-        }
-        @Override
-        public double calculateArea() {
-            return 3.141 * radius * radius;
-        }
-    }
-}
+import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Rectangle rectangle = new Rectangle(5,10) {
-            @Override
-            public double calculateArea() {
-                return width * height;
+    public static void main(String... args) {
+
+        int[] A = {6, 8, 3, 2, 9, 7, 4};
+        //         0, 1, 2, 3, 4, 5, 6
+        for (int i = 0; i < A.length; i++) {
+            int minInd = i; // i = 0 => 2 => 3
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[minInd] > A[j]) { //2 > 2
+                    minInd = j;
+                }
             }
-        };
+            int temp = A[i];
+            A[i]=A[minInd];
+            A[minInd] = temp;
+        }
 
-        Rectangle.Circle circle = new Rectangle.Circle(23.2);
-
-        System.out.println("Rectangle: "+ rectangle.calculateArea());
-        System.out.println("Circle: "+ circle.calculateArea());
+        System.out.println(Arrays.toString(A));
     }
 
+
 }
+
