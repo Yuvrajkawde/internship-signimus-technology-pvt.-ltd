@@ -1,30 +1,13 @@
-package com.IOStreamExample;
+package com.signimus.Student.Managment;
 
-import java.io.Serializable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
+@RestController
+public class Student {
 
-    private String name;
-    private int marks;
-
-    public Student(String name, int marks) {
-        this.name = name;
-        this.marks = marks;
-    }
-
-    // Getters (optional setters can be added too)
-    public String getName() {
-        return name;
-    }
-
-    public int getMarks() {
-        return marks;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{name='" + name + "', marks=" + marks + "}";
+    @GetMapping("api")
+    public String show(){
+        return "hello there";
     }
 }
-
