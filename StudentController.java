@@ -3,10 +3,7 @@ package com.signimus.Student.Managment.controller;
 import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.service.studentService.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -20,5 +17,11 @@ public class StudentController {
 
         Studentt studentt1 = studentServiceimpl.savestudent(studentt);
         return studentt1;
+    }
+
+    @GetMapping("get-student/{id}")
+    public Studentt searchById(@PathVariable Long id) {
+        Studentt studenttById = studentServiceimpl.findById(id);
+        return studenttById;
     }
 }

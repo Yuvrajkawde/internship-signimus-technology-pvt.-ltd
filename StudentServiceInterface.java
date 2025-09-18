@@ -4,4 +4,5 @@ import com.signimus.Student.Managment.entity.Studentt;
 
 public interface StudentServiceInterface {
     public Studentt savestudent(Studentt studentt);
+    public Studentt findById(Long StudentId);
 }
