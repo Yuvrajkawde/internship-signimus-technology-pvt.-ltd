@@ -5,6 +5,8 @@ import com.signimus.Student.Managment.service.studentService.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class StudentController {
 
@@ -23,5 +25,12 @@ public class StudentController {
     public Studentt searchById(@PathVariable Long id) {
         Studentt studenttById = studentServiceimpl.findById(id);
         return studenttById;
+    }
+
+    @GetMapping("get-all-std")
+    public List<Studentt> getAllStudent(){
+        List<Studentt> allStudent = studentServiceimpl.findAllStudent();
+        return allStudent;
+
     }
 }

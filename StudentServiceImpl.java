@@ -5,6 +5,7 @@ import com.signimus.Student.Managment.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,11 @@ public class StudentServiceImpl  implements StudentServiceInterface{
             throw new RuntimeException("student not found for id "+ StudentId);
         }
 
+    }
+
+    @Override
+    public List<Studentt> findAllStudent() {
+        return studentRepository.findAll();
+        //return List.of();
     }
 }
