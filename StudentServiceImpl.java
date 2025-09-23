@@ -37,4 +37,37 @@ public class StudentServiceImpl  implements StudentServiceInterface{
         return studentRepository.findAll();
         //return List.of();
     }
+
+
+    public Studentt updateStudentData(Long id, Studentt student) {
+    Optional<Studentt> optionalStudent = studentRepository.findById(id);
+    if(optionalStudent.isPresent()){
+        //database student
+        Studentt studentData = optionalStudent.get();
+        //data update
+        studentData.setName(student.getName());
+        studentData.setEmail(student.getEmail());
+        studentData.setAge(student.getAge());
+
+        //data save in db
+        return studentRepository.save(studentData);
+
+    }else{
+        throw new RuntimeException("Student is not available by ID: "+id);
+    }
+
+}
+
+    @Override
+    public String deleteStudent(Long id) {
+
+        Optional<Studentt> optionalStudentt = studentRepository.findById(id);
+        if (optionalStudentt.isPresent()){
+            studentRepository.deleteById(id);
+            return "student record deleted";
+        }else {
+            return "record not found for given id "+id;
+        }
+
+    }
 }

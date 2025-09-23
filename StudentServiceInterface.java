@@ -8,4 +8,6 @@ public interface StudentServiceInterface {
     public Studentt savestudent(Studentt studentt);
     public Studentt findById(Long StudentId);
     public List<Studentt> findAllStudent();
+     public Studentt updateStudentData(Long id, Studentt student);
+     public  String deleteStudent(Long id);
 }
