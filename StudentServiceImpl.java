@@ -70,4 +70,16 @@ public class StudentServiceImpl  implements StudentServiceInterface{
         }
 
     }
+
+     @Override
+    public Studentt findByEmail(String email) {
+        return studentRepository.findByEmail(email);
+
+    }
+
+    @Override
+    public List<Studentt> findByNameAndAge(String name, int age) {
+        List<Studentt> student = studentRepository.findByNameAndAge(name, age);
+        return student;
+    }
 }

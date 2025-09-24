@@ -1,10 +1,8 @@
 package com.signimus.Student.Managment.controller;
-
 import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.service.studentService.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -12,7 +10,6 @@ public class StudentController {
 
     @Autowired
     public  StudentServiceImpl studentServiceimpl;
-
 
    @PostMapping("add-student")
     public Studentt addStudent(@RequestBody Studentt studentt){
@@ -41,5 +38,16 @@ public class StudentController {
     @DeleteMapping("delete-student/{id}")
     public String deleteStudent(@PathVariable Long id) {
       return studentServiceimpl.deleteStudent(id);
+    }
+
+     @GetMapping("find-by-email/{email}")
+    public Studentt searchByEmail(@PathVariable String email){
+        Studentt student = studentServiceimpl.findByEmail(email);
+        return student;
+    }
+
+     @GetMapping("get-student-By")
+    public List<Studentt> getStudentByNameAndAge(@RequestParam (name="studentName", required = false) String name, @RequestParam int age){
+        return studentServiceimpl.findByNameAndAge(name,age);
     }
 }
