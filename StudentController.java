@@ -3,9 +3,12 @@ import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.service.studentService.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Method;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1/student")
 public class StudentController {
 
     @Autowired
@@ -50,4 +53,11 @@ public class StudentController {
     public List<Studentt> getStudentByNameAndAge(@RequestParam (name="studentName", required = false) String name, @RequestParam int age){
         return studentServiceimpl.findByNameAndAge(name,age);
     }
+
+    @RequestMapping(value = "add-new-std", method = RequestMethod.POST)
+    public Studentt addNewStudent(@RequestBody Studentt studentt) {
+    return studentServiceimpl.savestudent(studentt);
+}
+
+
 }
