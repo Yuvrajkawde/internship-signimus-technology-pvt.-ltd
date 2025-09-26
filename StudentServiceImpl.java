@@ -11,8 +11,14 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl  implements StudentServiceInterface{
 
-    @Autowired
+
     public StudentRepository studentRepository;
+
+    // setter injection
+    @Autowired
+    public void setStudentRepository(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public Studentt savestudent(Studentt studentt) {

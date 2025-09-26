@@ -11,10 +11,15 @@ import java.util.List;
 @RequestMapping("api/v1/student")
 public class StudentController {
 
-    @Autowired
-    public  StudentServiceImpl studentServiceimpl;
+//    @Autowired
+    private final  StudentServiceImpl studentServiceimpl;
 
-   @PostMapping("add-student")
+ //constructor injection
+    public StudentController(StudentServiceImpl studentServiceimpl) {
+        this.studentServiceimpl = studentServiceimpl;
+    }
+
+    @PostMapping("add-student")
     public Studentt addStudent(@RequestBody Studentt studentt){
 
         Studentt studentt1 = studentServiceimpl.savestudent(studentt);
@@ -54,7 +59,7 @@ public class StudentController {
         return studentServiceimpl.findByNameAndAge(name,age);
     }
 
-    @RequestMapping(value = "add-new-std", method = RequestMethod.POST)
+    @RequestMapping(path = "add-new-std", method = RequestMethod.POST)
     public Studentt addNewStudent(@RequestBody Studentt studentt) {
     return studentServiceimpl.savestudent(studentt);
 }
