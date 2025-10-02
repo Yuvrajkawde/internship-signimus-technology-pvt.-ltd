@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Builder
+
 public class TeacherServiceImpl implements TeacherServiceInterface{
 
     private TeacherRepository teacherRepository;
@@ -31,18 +31,22 @@ public class TeacherServiceImpl implements TeacherServiceInterface{
     @Override
     public Teacher updateTeacher(Teacher teacher, Long id) {
         Optional<Teacher> optionalTeacher = teacherRepository.findById(id);
-        if(optionalTeacher.isPresent()){
-            Teacher teacher1 = optionalTeacher.get();
-           teacher1.setTeacherName(teacher.getTeacherName());
-            teacher1.setEmail(teacher.getEmail());
-            teacher1.setSubject(teacher.getSubject());
+        if (optionalTeacher.isPresent()) {
+//            Teacher teacher1 = optionalTeacher.get();
+//            teacher1.setTeacherName(teacher.getTeacherName());
+//            teacher1.setEmail(teacher.getEmail());
+//            teacher1.setSubject(teacher.getSubject());
 
+//            using @Builder
+            Teacher teacher1 = Teacher.builder()
+                    .teacherName(teacher.getTeacherName())
+                    .subject(teacher.getSubject())
+                    .email(teacher.getEmail()).build();
 
 
             return teacherRepository.save(teacher1);
-        }else {
+        } else {
             throw new RuntimeException("user not found");
         }
-
-}
+    }
 }
