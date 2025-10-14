@@ -1,13 +1,16 @@
 package com.signimus.Student.Managment.service.studentService;
 
+import com.signimus.Student.Managment.Exceptions.CustomException;
 import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.repositories.StudentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class StudentServiceImpl  implements StudentServiceInterface{
 
@@ -31,9 +34,11 @@ public class StudentServiceImpl  implements StudentServiceInterface{
         Optional<Studentt> optionalStudentt = studentRepository.findById(StudentId);
         if (optionalStudentt.isPresent()){
             Studentt studentt = optionalStudentt.get();
+             log.info("student found");
             return studentt;
         }else {
-            throw new RuntimeException("student not found for id "+ StudentId);
+             log.error("student not found while finding student "+ StudentId);
+            throw new CustomException.StudentNotFoundException("student not found for id "+ StudentId);
         }
 
     }
@@ -69,6 +74,7 @@ public class StudentServiceImpl  implements StudentServiceInterface{
 
         Optional<Studentt> optionalStudentt = studentRepository.findById(id);
         if (optionalStudentt.isPresent()){
+            log.warn("user can deleted");
             studentRepository.deleteById(id);
             return "student record deleted";
         }else {
