@@ -1,10 +1,15 @@
 package com.signimus.Student.Managment.service.studentService;
 
 import com.signimus.Student.Managment.Exceptions.CustomException;
+import com.signimus.Student.Managment.dto.PagedResponse;
 import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.repositories.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -94,4 +99,30 @@ public class StudentServiceImpl  implements StudentServiceInterface{
         List<Studentt> student = studentRepository.findByNameAndAge(name, age);
         return student;
     }
+
+//    @Override
+//    public List<Studentt> findStudentByAge(int age) {
+//        List<Studentt> students = studentRepository.getStudentListByAge(age).orElseThrow(() -> new CustomException.StudentNotFoundByAgeException("student not found by this age : " + age));
+//
+//        return students;
+//    }
+
+    @Override
+    public List<Studentt> findStudentByAge(int age) {
+        List<Studentt> students = studentRepository.getStudentListByAge1(age).orElseThrow(() -> new CustomException.StudentNotFoundByAgeException("student not found by this age : " + age));
+
+        return students;
+    }
+
+@Override
+    public Page<Studentt> getAllStudentPage(int pageNumber, int pageSize) {
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Page<Studentt> allStudents = studentRepository.findAll(pageable);
+
+        return allStudents;
+    }
+
+
 }

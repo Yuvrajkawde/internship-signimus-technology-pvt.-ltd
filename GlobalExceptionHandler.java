@@ -16,4 +16,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handlerTeacherNotFoundException(CustomException.TeacherNotFoundException ex, WebRequest request){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+
+    @ExceptionHandler(CustomException.StudentNotFoundByAgeException.class)
+    public ResponseEntity<?> handlerStudentNotFoundByAgeException(CustomException.StudentNotFoundByAgeException exception, WebRequest request){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }

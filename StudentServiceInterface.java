@@ -1,6 +1,8 @@
 package com.signimus.Student.Managment.service.studentService;
 
+import com.signimus.Student.Managment.dto.PagedResponse;
 import com.signimus.Student.Managment.entity.Studentt;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,4 +14,7 @@ public interface StudentServiceInterface {
      public  String deleteStudent(Long id);
       public Studentt findByEmail(String email);
       public List<Studentt> findByNameAndAge(String name, int age);
+      public List<Studentt> findStudentByAge(int age);
+    public Page<Studentt> getAllStudentPage(int pageNumber, int pageSize);
+
 }

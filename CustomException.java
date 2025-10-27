@@ -14,5 +14,14 @@ public class CustomException {
          public TeacherNotFoundException(String message){
                 super(message);
             }
+
+
+    }
+
+
+    public static class StudentNotFoundByAgeException extends RuntimeException{
+        public StudentNotFoundByAgeException(String message){
+            super(message);
+        }
     }
 }
