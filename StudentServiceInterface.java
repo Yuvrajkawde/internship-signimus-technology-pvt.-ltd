@@ -1,6 +1,5 @@
 package com.signimus.Student.Managment.service.studentService;
 
-import com.signimus.Student.Managment.dto.PagedResponse;
 import com.signimus.Student.Managment.entity.Studentt;
 import org.springframework.data.domain.Page;
 
@@ -16,5 +15,6 @@ public interface StudentServiceInterface {
       public List<Studentt> findByNameAndAge(String name, int age);
       public List<Studentt> findStudentByAge(int age);
     public Page<Studentt> getAllStudentPage(int pageNumber, int pageSize);
+     public Page<Studentt> getStudentByGreaterThanAge(int age, int pageNumber, int pageSize  , boolean ascending, String sortBy);
 
 }

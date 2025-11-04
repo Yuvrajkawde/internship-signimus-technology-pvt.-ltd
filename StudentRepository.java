@@ -28,5 +28,7 @@ public interface StudentRepository extends JpaRepository<Studentt, Long> {
 
     public Page<Studentt> findAll(Pageable pageable);
 
+    @Query("SELECT s FROM Studentt s WHERE s.age >= :stdAge ")
+    public Page<Studentt> findStudentGreaterThanAge(@Param("stdAge") int age, Pageable pageable);
 
 }

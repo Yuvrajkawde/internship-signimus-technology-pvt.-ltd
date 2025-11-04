@@ -1,7 +1,7 @@
 package com.signimus.Student.Managment.service.studentService;
 
+import com.signimus.Student.Managment.DTO.StudentDTO;
 import com.signimus.Student.Managment.Exceptions.CustomException;
-import com.signimus.Student.Managment.dto.PagedResponse;
 import com.signimus.Student.Managment.entity.Studentt;
 import com.signimus.Student.Managment.repositories.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -122,6 +122,27 @@ public class StudentServiceImpl  implements StudentServiceInterface{
         Page<Studentt> allStudents = studentRepository.findAll(pageable);
 
         return allStudents;
+    }
+
+  @Override
+    public Page<Studentt> getStudentByGreaterThanAge(int age, int pageNumber, int pageSize  , boolean ascending, String sortBy) {
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        Page<Studentt> studentList = studentRepository.findStudentGreaterThanAge(age, pageable);
+        return studentList;
+    }
+
+     public StudentDTO getStudentDataWithProfile(Long id){
+        Studentt student = studentRepository.findById(id).orElseThrow(() -> new CustomException.StudentNotFoundException("student not found"));
+
+        StudentDTO std = new StudentDTO();
+        std.setName(student.getName());
+        std.setEmail(student.getEmail());
+        std.setCity(student.getStudentProfile().getCity());
+        std.setState(student.getStudentProfile().getState());
+
+        return std;
+
     }
 
 
